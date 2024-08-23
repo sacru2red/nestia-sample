@@ -2,7 +2,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  getHello() {
+    if (process.env.NODE_ENV === 'development') {
+      return {
+        messages: [
+          {
+            type: 0,
+            payload: 'Hello World!',
+          },
+        ] as const,
+      };
+    }
+    return {};
   }
 }
